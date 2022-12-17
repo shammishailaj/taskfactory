@@ -1,0 +1,5 @@
+host: 0.0.0.0
+port: 11111
+app_name: taskfactory
+app_desc: "A scheduler to be used as a cron replacement"
+theme: default

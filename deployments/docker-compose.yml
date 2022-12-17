@@ -1,0 +1,85 @@
+version: "3.7"
+
+services:
+  taskfactory:
+    container_name: taskfactory
+    image: taskfactory
+    build:
+      context: ..
+      dockerfile: ./deployments/Dockerfile
+      args:
+        - OS=${GOOS}
+        - CGO=${CGO_ENABLED}
+        - ARCH=${GOARCH}
+    environment:
+      - APP_ENV=local
+    stop_signal: SIGINT
+    volumes:
+      - ./web:/taskfactory/web
+    ports:
+      - 11111:11111
+    networks:
+      - taskfactory-net
+
+  taskfactory-dev:
+    container_name: taskfactory_dev
+    image: taskfactory_dev
+    build:
+      context: ..
+      dockerfile: ./deployments/Dockerfile
+      args:
+        - OS=${GOOS}
+        - CGO=${CGO_ENABLED}
+        - ARCH=${GOARCH}
+    entrypoint: /taskfactory/taskfactory serve
+    environment:
+      - APP_ENV=
+    stop_signal: SIGINT
+    volumes:
+      - ./../web:/taskfactory/web
+    ports:
+      - 11111:11111
+    networks:
+      - taskfactory-net
+
+  taskfactory-cli:
+    image: taskfactory_cli
+    container_name: taskfactory_cli
+    build:
+      context: ..
+      dockerfile: ./deployments/Dockerfile
+      args:
+        - OS=${GOOS}
+        - CGO=${CGO_ENABLED}
+        - ARCH=${GOARCH}
+      target: builder
+    environment:
+      - APP_ENV=local
+    stop_signal: SIGINT
+    volumes:
+      - ./..:/go/src/taskfactory
+    ports:
+      - 11111:11111
+    networks:
+      - taskfactory-net
+
+
+  tests:
+    build:
+      context: ..
+      dockerfile: ./deploy/Dockerfile
+    working_dir: /var/www/taskfactory
+    command: go test -v ./...
+    volumes:
+      - ./..:/var/www/taskfactory
+
+  linter:
+    image: golangci/golangci-lint:latest
+    working_dir: /app
+    command: golangci-lint run -v
+    volumes:
+      - ./..:/app
+
+networks:
+  taskfactory-net:
+    driver: bridge
