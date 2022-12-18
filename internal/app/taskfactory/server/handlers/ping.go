@@ -1,21 +1,20 @@
 package handlers
 
 import (
-	jsonresp "taskfactory/pkg/http/response/json"
-	"taskfactory/pkg/schemas"
+	jsonresp "github.com/shammishailaj/taskfactory/pkg/http/response/json"
+	"github.com/shammishailaj/taskfactory/pkg/schemas"
 	log "github.com/sirupsen/logrus"
 	"net/http"
 )
 
-
 type Ping struct {
-	l *log.Logger
+	l      *log.Logger
 	semVer *schemas.SemanticVersion
 }
 
-func NewPing(l *log.Logger, version *schemas.SemanticVersion) *Ping{
+func NewPing(l *log.Logger, version *schemas.SemanticVersion) *Ping {
 	return &Ping{
-		l: l,
+		l:      l,
 		semVer: version,
 	}
 }

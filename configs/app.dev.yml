@@ -3,3 +3,5 @@ port: 11111
 app_name: taskfactory
 app_desc: "A scheduler to be used as a cron replacement"
 theme: default
+crons_list_page_refresh_interval: 20000
+time_zone: "Asia/Kolkata"

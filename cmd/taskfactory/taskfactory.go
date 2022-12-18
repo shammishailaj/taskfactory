@@ -1,11 +1,9 @@
 /*
-Copyright © 2022  
+Copyright © 2022
 
 Licensed under the  License, Version 20221217 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-
-    
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,7 +14,7 @@ limitations under the License.
 package main
 
 import (
-	"taskfactory/internal/app/taskfactory/cmd"
+	"github.com/shammishailaj/taskfactory/internal/app/taskfactory/cmd"
 )
 
 var (
@@ -29,12 +27,11 @@ var (
 )
 
 func main() {
-    cmd.BuildDate = BuildDate
+	cmd.BuildDate = BuildDate
 	cmd.GitBranch = GitBranch
 	cmd.GitCommit = GitCommit
 	cmd.GitState = GitState
 	cmd.GitSummary = GitSummary
 	cmd.Version = Version
-    cmd.Execute()
+	cmd.Execute()
 }
-

@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"taskfactory/pkg/schemas"
-	"taskfactory/pkg/utils"
+	"github.com/shammishailaj/taskfactory/pkg/schemas"
+	"github.com/shammishailaj/taskfactory/pkg/utils"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	"net/http"
@@ -13,7 +13,7 @@ type Home struct {
 	l *log.Logger
 }
 
-func NewHome(l *log.Logger) *Home{
+func NewHome(l *log.Logger) *Home {
 	return &Home{
 		l: l,
 	}

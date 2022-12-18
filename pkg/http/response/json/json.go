@@ -6,9 +6,9 @@
 package json
 
 import (
-	"taskfactory/pkg/http/response"
 	"encoding/json"
 	"errors"
+	"github.com/shammishailaj/taskfactory/pkg/http/response"
 	logger "github.com/sirupsen/logrus"
 	"net/http"
 )
@@ -48,6 +48,17 @@ func ServerError(w http.ResponseWriter, r *http.Request, err error) {
 	builder.WithStatus(http.StatusInternalServerError)
 	builder.WithHeader("Content-Type", contentTypeHeader)
 	builder.WithBody(toJSONError(err))
+	builder.Write()
+}
+
+// ServerErrorString sends an internal error to the client.
+func ServerErrorString(w http.ResponseWriter, r *http.Request, body interface{}) {
+	logger.Error("[HTTP:Internal Server Error] %s => %v", r.URL, body)
+
+	builder := response.New(w, r)
+	builder.WithStatus(http.StatusInternalServerError)
+	builder.WithHeader("Content-Type", contentTypeHeader)
+	builder.WithBody(toJSON(body))
 	builder.Write()
 }
 
@@ -106,7 +117,7 @@ func toJSONError(err error) []byte {
 func toJSON(v interface{}) []byte {
 	b, err := json.Marshal(v)
 	if err != nil {
-		logger.Error("[HTTP:JSON] %v", err)
+		logger.Error("[HTTP:JSON] %s", err.Error())
 		return []byte("")
 	}
 

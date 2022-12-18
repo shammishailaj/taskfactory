@@ -43,4 +43,31 @@ $(document).ready(function() {
             timeout: 10000
         });
     });
+
+    if( $("#cron-list-data").length ) {
+        console.log("cron-list-data.length is true. Refresh event will be scheduled");
+        dataURL = $("#cron-list-data").data("url");
+        refreshInterval = $("#cron-list-data").data("refresh");
+        // Refresh the cron table every 5 seconds
+        setInterval(function () {
+            $.get(dataURL, function (crons) {
+                console.log("crons data = ", JSON.stringify(crons))
+                // Clear the cron table
+                $("#cron-table tbody").empty();
+                $("#cron-list-data").html(loaderHTML);
+                // Populate the cron table
+                let cronListTableData = "<table class=\"table table-bordered table-white\" id=\"cron-list-table\" style=\"color:white\"><thead><tr>" +
+                    "<th>ID</th><th>Schedule</th><th>Next Execution</th><th>Previous Execution</th></tr></thead><tbody>";
+                crons.forEach(function (cron) {
+                    console.log("cron data = ", JSON.stringify(cron));
+                    cronListTableData += "<tr><td>" + cron.jobID + "</td><td>" + cron.schedule + "</td><td>" + cron.next + "</td><td>" + cron.previous + "</td></tr>";
+                });
+
+                cronListTableData += "</tbody></table>";
+                $("#cron-list-data").html(cronListTableData);
+            });
+        }, refreshInterval);
+    } else {
+        console.log("cron-list-data.length is false. Refresh event will not be scheduled");
+    }
 });

@@ -1,8 +1,8 @@
-# taskfactory
+# Task Factory
 
 ---
 
-taskfactory
+Task Factory
 A scheduler to be used as a cron replacement
 
 The boilerplate for this project has been generated using [goboiler](https://github.com/shammishailaj/goboiler) which is a fork of [go-wagen](https://github.com/groovili/go-wagen).
@@ -37,12 +37,12 @@ The generated structure has been further modified as per the [Golang Standards P
 ---
 
 |Requirements Grid||
-|---|---|
-|Software|Version|
-|Docker| &gt;= 19.03.13|
-|---|---|
-|Docker Compose| &gt;= 2.0.0|
-|Ubuntu `build-essential` package||
+|---|--------------- Version              |
+|Software| Version              |
+|Docker| &gt;= 22.06.0-beta.0 |
+|---| ---                  |
+|Docker Compose| &gt;= 2.0.0          |
+|Ubuntu `build-essential` package| Docker Image: shammishailaj/gobuilder:0.0.6                      |
 
 The default app can be run/built using the following `make` targets.
 
@@ -50,9 +50,9 @@ The default app can be run/built using the following `make` targets.
 
 ---
 
-`run` - Builds and runs the default app using the `docker` image `shammishailaj/gobuilder:0.0.3`
+`run` - Builds and runs the default app using the `docker` image `shammishailaj/gobuilder:0.0.6`
 
-`build` - Builds the project using the `docker` image `shammishailaj/gobuilder:0.0.3` first and then copies all the required project files into a `scratch` image. The resultant is a docker image and not an executable.
+`build` - Builds the project using the `docker` image `shammishailaj/gobuilder:0.0.6` first and then copies all the required project files into a `scratch` image. The resultant is a docker image and not an executable.
 
 
 
@@ -60,7 +60,7 @@ The default app can be run/built using the following `make` targets.
 
 ---
 
-- taskfactory CLI and Web server
+- Task Factory CLI and Web server
 
 
 #### How to run

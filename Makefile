@@ -10,7 +10,7 @@ run:
 	COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILDKIT=1 CGO_ENABLED=0 GOOS=$(os) GOARCH=$(arch) docker compose -f ./deployments/docker-compose.yml up --remove-orphans taskfactory-dev
 
 cli:
-	sh ./deployments/build_cli.sh GOOS=$(os) GOARCH=$(arch)
+	sh ./deployments/build_cli.sh $(os) $(arch)
 
 test:
 	docker compose -f ./deployments/docker-compose.yml up tests

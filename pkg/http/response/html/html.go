@@ -6,7 +6,7 @@
 package html
 
 import (
-	"taskfactory/pkg/http/response"
+	"github.com/shammishailaj/taskfactory/pkg/http/response"
 	logger "github.com/sirupsen/logrus"
 	"net/http"
 )

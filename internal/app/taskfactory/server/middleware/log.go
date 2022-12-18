@@ -1,27 +1,27 @@
 package middleware
 
-import(
+import (
 	"bytes"
 	"fmt"
+	"github.com/shammishailaj/taskfactory/pkg/utils"
+	log "github.com/sirupsen/logrus"
 	"io/ioutil"
 	"net/http"
-	log "github.com/sirupsen/logrus"
-	"taskfactory/pkg/utils"
 )
 
 type Log struct {
-	l *log.Logger
+	l         *log.Logger
 	printBody bool
 }
 
-func NewLog(l *log.Logger, printBody bool) *Log{
+func NewLog(l *log.Logger, printBody bool) *Log {
 	return &Log{
-		l:l,
+		l:         l,
 		printBody: printBody,
 	}
 }
 
-func (l *Log) Handler (next http.Handler) http.Handler {
+func (l *Log) Handler(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		u := utils.NewUtils(l.l)
 		w.Header().Set("X-Backend-Server", u.Hostname())
